@@ -1,0 +1,33 @@
+/* Table: chats */
+{{
+    config(
+        materialized='incremental'
+    )
+}}
+SELECT
+    t."unread",
+    t."deleted",
+    t."timestamp",
+    t."update_timestamp",
+    t."type",
+    t."session__browser",
+    t."session__city",
+    t."session__country_code",
+    t."session__country_name",
+    t."session__end_date",
+    t."session__id",
+    t."session__ip",
+    t."session__platform",
+    t."session__region",
+    t."session__start_date",
+    t."session__user_agent",
+    t."id",
+    t."message",
+    t."visitor__phone",
+    t."visitor__notes",
+    t."visitor__id",
+    t."visitor__name",
+    t."visitor__email",
+    t."_dlt_load_id",
+    t."_dlt_id",
+FROM  {{ ref('stg_zendesk_pipeline__chats') }} as t

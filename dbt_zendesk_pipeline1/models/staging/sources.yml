@@ -1,0 +1,61 @@
+version: 2
+sources:
+  - name: raw_data
+    schema: '{{ var ("source_dataset_name") }}'
+    tables:
+      - name: _dlt_loads
+      - name: chats
+  - name: transformed_data
+    schema: '{{ var ("destination_dataset_name") }}'
+    tables:
+      - name: zendesk_pipeline1_dlt_processed_load_ids
+
+models:
+      - name: zendesk_pipeline1_dlt_processed_load_ids
+        description: "This table contains all processed load ids for incremental loading"
+      - name: _dlt_loads
+        description: "Created by DLT. Tracks completed loads"
+        columns:
+          - name: load_id
+            tests:
+              - not_null
+          - name: schema_name
+          - name: status
+            tests:
+              - not_null
+          - name: inserted_at
+            tests:
+              - not_null
+          - name: schema_version_hash
+      - name: chats
+        columns:
+          - name: session__browser
+          - name: session__city
+          - name: session__country_code
+          - name: session__country_name
+          - name: session__end_date
+          - name: session__id
+          - name: session__ip
+          - name: session__platform
+          - name: session__region
+          - name: session__start_date
+          - name: session__user_agent
+          - name: visitor__phone
+          - name: visitor__notes
+          - name: visitor__id
+          - name: visitor__name
+          - name: visitor__email
+          - name: unread
+          - name: message
+          - name: timestamp
+          - name: id
+          - name: deleted
+          - name: update_timestamp
+          - name: type
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
